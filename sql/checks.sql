@@ -109,4 +109,23 @@ SELECT pairs, eligible, ROUND(pairs * 100.0 / eligible, 1) AS repeat_rate_pct
 FROM (SELECT (SELECT COUNT(*) FROM repeat_pairs) AS pairs,
              (SELECT COUNT(*) FROM conversations
               WHERE n_customers = 1
-                AND start_ts BETWEEN '2017-10-01' AND '2017-11-26 23:59:59') AS eligible);
+                AND start_ts BETWEEN '2017-10-01' AND '2017-11-26 23:59:59') AS eligible);    
+                -- ---------------------------------------------------------------------
+-- Step: 06_sample_pairs.sql
+-- Check: sample size and airline mix
+-- Result: 120 pairs | Delta 32, AmericanAir 32, SouthwestAir 19,
+--   British_Airways 16, AlaskaAir 9, AirAsiaSupport 5, VirginAmerica 3,
+--   JetBlue 3, VirginAtlantic 1 (roughly proportional to volume)
+-- ---------------------------------------------------------------------
+SELECT airline, COUNT(*) AS pairs
+FROM sample_pairs GROUP BY airline ORDER BY pairs DESC;
+
+-- ---------------------------------------------------------------------
+-- Step: 07_export_sample_text.sql
+-- Check: export file complete and readable
+-- Result: data/sample_pairs_text.csv has 758 tweets (+ header),
+--   all 120 pairs present, columns verified by loading the CSV back
+--   into a temporary database
+-- Verified with (terminal, not SQL):
+--   tail -n +2 data/sample_pairs_text.csv | cut -d, -f1 | sort -u | wc -l
+-- ---------------------------------------------------------------------
