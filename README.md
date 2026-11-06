@@ -30,6 +30,9 @@ xychart-beta horizontal
     y-axis "Share of real repeats (%)" 0 --> 70
     bar [60, 24, 8, 8]
 ```
+<details>
+<summary>Show exact numbers</summary>
+
 | Why the customer came back | Share of repeats |
 |---|---|
 | Not an issue (praise, chatter) | 44% |
@@ -43,6 +46,8 @@ xychart-beta horizontal
 | Support response | 24% |
 | Product (website/app) | 8% |
 | Policy | 8% |
+
+</details>
 
 ## Approach
 
