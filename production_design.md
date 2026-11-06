@@ -1,12 +1,17 @@
 # From Prototype to Production
 
-The prototype is a single manual pass on public data. This describes
-how the same approach would run continuously in a real support
-operation, how its output would guide priorities, and how to measure
-whether a fix worked.
+This prototype shows an AI tool that automatically evaluates customer
+service conversations: it finds repeat contacts, classifies why each
+customer came back and who owns the fix, and measures its own accuracy
+against human labels. It ran once on a fixed public dataset.
 
-*Expedia-specific details are assumptions based on the public job
-description, not internal knowledge.*
+This document describes how it would run on an ongoing basis in a real
+support operation: pulling new data on a schedule, evaluating every
+repeat contact, routing findings to owners, and measuring whether fixes
+work.
+
+*Production details are assumptions about a typical large support
+operation, not based on internal knowledge of any company.*
 
 ## 1. How it would run continuously
 

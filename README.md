@@ -1,8 +1,12 @@
-# Why Customers Contact Support Again: AI-Assisted Repeat-Contact Analysis
+# AI-Powered Repeat-Contact Analysis: Prototype
 
-A prototype that finds repeat customer contacts in public airline support
-data, uses AI to classify why each customer came back and who owns the fix,
-and measures how accurate the AI's labels are against human review.
+A prototype of an AI tool that automatically evaluates customer service
+conversations to find why customers come back and who owns the fix,
+and checks its own accuracy against human review. The goal is the kind of
+tooling that gives operations leaders a full picture of service quality,
+instead of a small manually reviewed sample.
+
+Built on public airline support data from Twitter.
 
 ## Data at a glance
 
