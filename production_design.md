@@ -21,10 +21,24 @@ operation, not based on internal knowledge of any company.*
 | Find repeats | SQL files, run once | Same SQL logic, run automatically on each new batch |
 | Classify | 120-pair sample | Every repeat, classified via an LLM API, labels written to a table |
 | Check AI quality | 30 hand-labeled pairs, once | Small human-reviewed sample every week; agreement tracked over time, with an alert if it drops |
-| Visualize | Two charts in a README | Dashboard: repeat rate over time, broken down by reason, owner, channel and product, with date-range filters and drill-down to example conversations |
+| Visualize | Two charts in a README | Operations dashboard (views listed below) |
 | Action | A report | Tickets created in each owner's project management tool (e.g. Jira) when a pattern crosses a set threshold, with volume, trend and example conversations attached; tracked through to closure |
 | Measure | Not applicable | Each ticket's fix is tracked through to a before-and-after repeat rate (see section 4) |
 | Change the prompt | Guide refined by hand | Changes tested against a fixed "golden set" of labeled examples before release |
+
+**Dashboard views:**
+- **Repeat types:** volume and share of each return reason, and how
+  each is trending.
+- **Owners:** volume and share of real repeats by fix owner, and how
+  each is trending.
+- **Repeat rate over time:** overall 7-day repeat rate, week over week.
+- **Top patterns:** the most common specific issues (e.g. "promised
+  follow-up not delivered"), and any that are rising quickly.
+- **Fix tracking:** open tickets by owner, status, and before-and-after
+  impact of completed fixes.
+- **AI accuracy:** weekly agreement between AI labels and human review.
+- **Filters and drill-down:** date range, channel and product; click
+  through to example conversations behind any number.
 
 **Two loops run together:**
 - **Operations loop:** classify → dashboard → ticket to owner → owner
