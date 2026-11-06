@@ -7,8 +7,8 @@ against human labels. It ran once on a fixed public dataset.
 
 This document describes how it would run on an ongoing basis in a real
 support operation: pulling new data on a schedule, evaluating every
-repeat contact, routing findings to owners, and measuring whether fixes
-work.
+repeat contact, showing results on a dashboard, routing findings to
+owners, and measuring whether fixes work.
 
 *Production details are assumptions about a typical large support
 operation, not based on internal knowledge of any company.*
@@ -18,21 +18,25 @@ operation, not based on internal knowledge of any company.*
 | Stage | Prototype | Production |
 |---|---|---|
 | Data | One Kaggle file | Scheduled job (daily/weekly) pulling new contacts from the data warehouse: chat and call transcripts, case records |
-| Find repeats | SQL, run by hand | Same SQL logic, run automatically on each new batch |
+| Find repeats | SQL files, run once | Same SQL logic, run automatically on each new batch |
 | Classify | 120-pair sample | Every repeat, classified via an LLM API, labels written to a table |
 | Check AI quality | 30 hand-labeled pairs, once | Small human-reviewed sample every week; agreement tracked over time, with an alert if it drops |
+| Visualize | Two charts in a README | Dashboard: repeat rate over time, broken down by reason, owner, channel and product, with date-range filters and drill-down to example conversations |
+| Action | A report | Tickets created in each owner's project management tool (e.g. Jira) when a pattern crosses a set threshold, with volume, trend and example conversations attached; tracked through to closure |
+| Measure | Not applicable | Each ticket's fix is tracked through to a before-and-after repeat rate (see section 4) |
 | Change the prompt | Guide refined by hand | Changes tested against a fixed "golden set" of labeled examples before release |
-| Act | A report | Findings routed to each owner's backlog; fixes measured before and after |
 
 **Two loops run together:**
-- **Operations loop:** classify → route to owner → owner fixes → measure → repeat.
+- **Operations loop:** classify → dashboard → ticket to owner → owner
+  fixes → measure impact → repeat.
 - **Classifier loop:** review a sample → find error patterns → update the
   guide and prompt → retest on the golden set → release.
 
 **What success looks like:** each week, leaders see the repeat rate by
 reason and owner across all contacts, not a sample. Each owner has a
-ranked list of their top repeat drivers. Every fix has a measured
-before-and-after. AI accuracy is a tracked number, not an assumption.
+ranked list of their top repeat drivers in their own backlog. Every fix
+has a measured before-and-after. AI accuracy is a tracked number, not an
+assumption.
 
 ## 2. How it guides priorities
 
@@ -82,15 +86,16 @@ customer relations) get a status update within 48 hours.
    labeling, not the fix.
 6. **Decision rule:** agree in advance what size of drop counts as
    success, and how long to measure.
-   ## 5. Safeguards
+
+## 5. Safeguards
 
 **Already in the prototype**
 - **Prompt injection:** the AI is told to treat tweet text as data only
   and ignore any instructions inside it.
 - **Cost and code control:** AI tagging ran with no scripts or API calls,
   so no unreviewed code ran and no unexpected costs were possible.
-- **Data kept out of the repo:** raw data stays local; the repo holds
-  queries, labels and results.
+- **Raw data kept out of the repo:** the full dataset stays local; the
+  repo holds queries, labels and results.
 - **Human check before trust:** AI accuracy was measured against blind
   human labels before its output was used.
 
