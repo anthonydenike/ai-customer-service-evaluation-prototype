@@ -95,10 +95,17 @@ xychart-beta horizontal
 - Opening tweets that never got an airline reply aren't captured.
 - Results come from a 120-pair sample; percentages are approximate.
 
-## Beyond the prototype
+## Repo guide
 
-See `production_design.md` for how this would run continuously, guide
-priorities, measure whether a fix worked, and the safeguards it would need.
+| Path | What it is |
+|---|---|
+| [`sql/`](sql/) | Pipeline: build tables, find repeats, sample, compare labels (files 01–08) |
+| [`sql/checks.sql`](sql/checks.sql) | Every validation check, its result, and decisions made |
+| [`labeling_guide.md`](labeling_guide.md) | Label definitions used by both AI and human |
+| [`prompts/tagging_prompt.md`](prompts/tagging_prompt.md) | Exact AI prompt and run notes |
+| [`evaluation_plan.md`](evaluation_plan.md) | How accuracy was measured, and results |
+| [`production_design.md`](production_design.md) | Production design, measurement plan, safeguards |
+| [`labels/`](labels/) | AI labels, human labels, disagreement review |
 
 ## Repo guide
 
