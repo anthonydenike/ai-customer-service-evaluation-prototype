@@ -1,12 +1,21 @@
 # AI-Powered Repeat-Contact Analysis: Prototype
 
-A prototype of an AI tool that automatically evaluates customer service
-conversations to find why customers come back and who owns the fix,
-and checks its own accuracy against human review. The goal is the kind of
-tooling that gives operations leaders a full picture of service quality,
-instead of a small manually reviewed sample.
+A prototype AI tool that automatically evaluates customer service
+conversations: it finds customers who came back within a week, classifies
+why they came back and who owns the fix, and measures its own accuracy
+against human review.
 
-Built on public airline support data from Twitter.
+**Questions answered:**
+1. How often do customers come back within 7 days?
+2. Why did they come back?
+3. Who would need to fix it: support, policy, product, or operations?
+
+**Data:** 2.8 million public support tweets (Kaggle, "Customer Support
+on Twitter"), narrowed to 9 airlines and ~113,000 conversations,
+October to early December 2017.
+
+**Method:** SQL finds the repeat contacts, an AI model labels a random
+sample of 120, and a blind human review of 30 measures the AI's accuracy.
 
 ## Key findings
 
@@ -14,11 +23,15 @@ Built on public airline support data from Twitter.
   with the same airline within 7 days.
 - **79% of those weren't real repeats.** Most were praise or unrelated
   new questions. Only about **21%** were customers returning because of
-  an actual problem, so the true repeat rate was roughly **1–2.5%**.
+  an actual problem, so the true repeat rate was **about 2%** (estimated
+  from a sample of 120).
 - **Operations drove most real repeats** (60%): ongoing delays,
   cancellations, lost bags. Support-response issues were 24%.
-- **AI labels matched human review 76.7%** of the time blind, and
-  **96.7%** were judged acceptable after reviewing disagreements.
+- **The AI's labels were 96.7% accurate** (29 of 30) when checked against
+  human-reviewed labels. Its one error came from judging how the airline
+  replied *after* the customer returned, rather than why they returned,
+  which a clearer rule in the prompt would address. Details in
+  [evaluation_plan.md](evaluation_plan.md).
 
 ```mermaid
 %%{init: {"xyChart": {"width": 700, "height": 220}}}%%
@@ -134,4 +147,6 @@ different pairs from the ones labeled here.
 
 ## How this was built
 
-Built in GitHub Codespaces
+Built in GitHub Codespaces with SQLite, with Claude as an AI assistant
+for writing SQL and for labeling. Analysis decisions, the labeling guide,
+hand labels and disagreement review are my own.
