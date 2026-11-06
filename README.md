@@ -15,7 +15,21 @@ and measures how accurate the AI's labels are against human review.
   cancellations, lost bags. Support-response issues were 24%.
 - **AI labels matched human review 76.7%** of the time blind, and
   **96.7%** were judged acceptable after reviewing disagreements.
+```mermaid
+xychart-beta horizontal
+    title "Why customers came back (120 sampled repeats)"
+    x-axis ["Not an issue", "New issue", "Unresolved issue", "Inadequate answer"]
+    y-axis "Share of repeats (%)" 0 --> 50
+    bar [44, 35, 17, 4]
+```
 
+```mermaid
+xychart-beta horizontal
+    title "Who owns the fix (25 real repeats)"
+    x-axis ["Airline operations", "Support response", "Product", "Policy"]
+    y-axis "Share of real repeats (%)" 0 --> 70
+    bar [60, 24, 8, 8]
+```
 | Why the customer came back | Share of repeats |
 |---|---|
 | Not an issue (praise, chatter) | 44% |
