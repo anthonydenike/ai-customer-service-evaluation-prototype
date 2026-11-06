@@ -8,28 +8,6 @@ instead of a small manually reviewed sample.
 
 Built on public airline support data from Twitter.
 
-## Data at a glance
-
-**Source:** Kaggle "Customer Support on Twitter": public tweets between
-customers and company support accounts.
-**Time period:** October 1 to December 3, 2017 (first contacts counted
-through November 26, so each had a full 7-day follow-up window).
-**Airlines (9):** Delta, American, British Airways, Southwest, AirAsia,
-JetBlue, Alaska, Virgin Atlantic, Virgin America.
-
-| Stage | Count |
-|---|---|
-| All tweets in dataset | 2,811,774 |
-| Airline support tweets | 361,785 |
-| Conversations (reply threads) | 113,891 |
-| Eligible first contacts | 97,327 |
-| Repeat contacts (1 hour to 7 days later) | 8,475 (8.7%) |
-| Random sample labeled by AI | 120 pairs |
-| Hand-labeled for accuracy check | 30 pairs |
-
-**Repeat contact:** the same customer contacting the same airline again,
-in a new conversation, 1 hour to 7 days after their first contact.
-
 ## Key findings
 
 - **8.7%** of customer conversations were followed by another contact
@@ -79,6 +57,28 @@ xychart-beta horizontal
 
 </details>
 
+## Data at a glance
+
+**Source:** Kaggle "Customer Support on Twitter": public tweets between
+customers and company support accounts.
+**Time period:** October 1 to December 3, 2017 (first contacts counted
+through November 26, so each had a full 7-day follow-up window).
+**Airlines (9):** Delta, American, British Airways, Southwest, AirAsia,
+JetBlue, Alaska, Virgin Atlantic, Virgin America.
+
+| Stage | Count |
+|---|---|
+| All tweets in dataset | 2,811,774 |
+| Airline support tweets | 361,785 |
+| Conversations (reply threads) | 113,891 |
+| Eligible first contacts | 97,327 |
+| Repeat contacts (1 hour to 7 days later) | 8,475 (8.7%) |
+| Random sample labeled by AI | 120 pairs |
+| Hand-labeled for accuracy check | 30 pairs |
+
+**Repeat contact:** the same customer contacting the same airline again,
+in a new conversation, 1 hour to 7 days after their first contact.
+
 ## Approach
 
 1. **Data:** Kaggle "Customer Support on Twitter" (2.8M tweets, 2017),
@@ -111,13 +111,13 @@ safeguards it would need.
 
 | Path | What it is |
 |---|---|
-| `sql/01–08_*.sql` | Pipeline: build tables, find repeats, sample, compare labels |
-| `sql/checks.sql` | Every validation check, its result, and decisions made |
-| `labeling_guide.md` | Label definitions used by both AI and human |
-| `prompts/tagging_prompt.md` | Exact AI prompt and run notes |
-| `evaluation_plan.md` | How accuracy was measured, and results |
-| `production_design.md` | Production design, measurement plan, safeguards |
-| `labels/` | AI labels, human labels, disagreement review |
+| [`sql/`](sql/) | Pipeline: build tables, find repeats, sample, compare labels (files 01–08) |
+| [`sql/checks.sql`](sql/checks.sql) | Every validation check, its result, and decisions made |
+| [`labeling_guide.md`](labeling_guide.md) | Label definitions used by both AI and human |
+| [`prompts/tagging_prompt.md`](prompts/tagging_prompt.md) | Exact AI prompt and run notes |
+| [`evaluation_plan.md`](evaluation_plan.md) | How accuracy was measured, and results |
+| [`production_design.md`](production_design.md) | Production design, measurement plan, safeguards |
+| [`labels/`](labels/) | AI labels, human labels, disagreement review |
 
 ## Reproduce
 
@@ -134,6 +134,4 @@ different pairs from the ones labeled here.
 
 ## How this was built
 
-Built in GitHub Codespaces with SQLite, with Claude as an AI assistant
-for writing SQL and for labeling. Analysis decisions, the labeling guide,
-hand labels and disagreement review are my own.
+Built in GitHub Codespaces
