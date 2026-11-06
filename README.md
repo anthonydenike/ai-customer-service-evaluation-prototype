@@ -43,6 +43,7 @@ in a new conversation, 1 hour to 7 days after their first contact.
   **96.7%** were judged acceptable after reviewing disagreements.
 
 ```mermaid
+%%{init: {"xyChart": {"width": 700, "height": 220}}}%%
 xychart-beta horizontal
     title "Why customers came back (120 sampled repeats)"
     x-axis ["Not an issue 44%", "New issue 35%", "Unresolved issue 17%", "Inadequate answer 4%"]
@@ -51,6 +52,7 @@ xychart-beta horizontal
 ```
 
 ```mermaid
+%%{init: {"xyChart": {"width": 700, "height": 220}}}%%
 xychart-beta horizontal
     title "Who owns the fix (25 real repeats)"
     x-axis ["Airline operations 60%", "Support response 24%", "Product 8%", "Policy 8%"]
