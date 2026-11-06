@@ -38,3 +38,25 @@ done, so human and AI labels use the same rules. Candidates for guide v2:
    getting the run around"), use unresolved_issue / support_response.
    support_response covers any response owed by support, including
    promised follow-ups, not only the first reply. (Found in pairs 63, 97.)
+   ## Results
+
+I hand-labeled 30 pairs (31–60) without seeing the AI's labels, then
+compared. The AI used Sonnet 5 via Claude Code.
+
+| Measure | Result |
+|---|---|
+| AI and human agreed on both labels | 23 of 30 (76.7%) |
+| AI label judged acceptable after reviewing disagreements | 29 of 30 (96.7%) |
+
+**What the 7 disagreements turned out to be:**
+- 3 were my labeling mistakes (the AI was right)
+- 3 were genuinely ambiguous: both labels were reasonable under the guide
+- 1 was a clear AI error
+
+**Main finding:** the AI's one consistent mistake was judging how the
+airline replied *after* the customer came back, instead of *why* they
+came back. It happened 3 times across all 120 pairs. A clearer rule in
+the labeling guide would likely fix it.
+
+Note: 30 pairs is a small sample, so treat the percentages as rough.
+Full detail: `labels/disagreements.csv`.

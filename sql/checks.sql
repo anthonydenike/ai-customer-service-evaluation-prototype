@@ -129,3 +129,15 @@ FROM sample_pairs GROUP BY airline ORDER BY pairs DESC;
 -- Verified with (terminal, not SQL):
 --   tail -n +2 data/sample_pairs_text.csv | cut -d, -f1 | sort -u | wc -l
 -- ---------------------------------------------------------------------
+-- ---------------------------------------------------------------------
+-- Step: 08_compare_labels.sql
+-- Check: human vs AI agreement on blind accuracy set (pairs 31-60)
+-- Result: reason 24/30 (80.0%) | owner 25/30 (83.3%) | both 23/30 (76.7%)
+--   After disagreement review: 29/30 (96.7%) AI labels accepted;
+--   3 human errors, 3 guide ambiguities, 1 AI error
+-- ---------------------------------------------------------------------
+SELECT COUNT(*) AS pairs,
+       ROUND(100.0 * SUM(reason_match) / COUNT(*), 1) AS reason_pct,
+       ROUND(100.0 * SUM(owner_match) / COUNT(*), 1) AS owner_pct,
+       ROUND(100.0 * SUM(reason_match AND owner_match) / COUNT(*), 1) AS both_pct
+FROM label_comparison;
